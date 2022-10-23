@@ -1,0 +1,23 @@
+
+version: '3'
+services:
+  jupyter:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - /home/nikita/JupyterTest:/home/jovyan
+    ports:
+      - "1000:8888"
+
+  db:
+    image: postgres
+    restart: always
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+     - "5432:5432"
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+volumes: 
+  pgdata:
